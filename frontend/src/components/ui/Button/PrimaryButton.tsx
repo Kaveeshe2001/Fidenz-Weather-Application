@@ -7,6 +7,7 @@ type PrimaryButtonProps = {
     type?: 'button' | 'submit' | 'reset';
     size?: 'lg';
     variant?: 'active' | 'outline' | 'nonActive';
+    icon?: React.ReactElement;
 }
 
 const PrimaryButton = ({
@@ -16,6 +17,7 @@ const PrimaryButton = ({
     type,
     size,
     variant,
+    icon
 }: PrimaryButtonProps) => {
     const buttonStyle = `primary-btn ${size === 'lg' && 'lg'} ${
         variant === 'active'
@@ -31,11 +33,11 @@ const PrimaryButton = ({
     <>
       {link ? (
         <a href={link} className={buttonStyle}>
-            {text}
+            {text} {icon && icon}
         </a>
       ) : (
         <button className={buttonStyle} onClick={onClick} type={type} >
-            {text}
+            {text} {icon && icon}
         </button>
       )}
     </>

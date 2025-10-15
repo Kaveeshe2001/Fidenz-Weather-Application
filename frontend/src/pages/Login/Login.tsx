@@ -1,9 +1,9 @@
 import { useState } from "react"
-import Form from "../../components/Form/Form";
 import { Col } from "react-bootstrap";
-import Input from "../../components/Input/Input";
-import PrimaryButton from "../../components/Button/PrimaryButton";
 import { useAuth } from "../../providers/AuthProvider";
+import Input from "../../components/ui/Input/Input";
+import Form from "../../components/ui/Form/Form";
+import PrimaryButton from "../../components/ui/Button/PrimaryButton";
 
 const Login = () => {
   const { loginUser } = useAuth();
