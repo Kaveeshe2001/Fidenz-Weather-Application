@@ -15,6 +15,6 @@ const Form: React.FC<FormProps> = ({children, onSubmit}) => {
   )
 }
 
-export default Form
+export default Form;
 
 

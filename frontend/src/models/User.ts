@@ -8,3 +8,8 @@ export interface AuthResponse {
   expires_in: number;
   token_type: string;
 }
+
+export interface AuthUser {
+  sub: string;
+  exp: number;
+}
