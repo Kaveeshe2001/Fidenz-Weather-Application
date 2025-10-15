@@ -84,6 +84,8 @@ namespace backend
 
             app.UseHttpsRedirection();
 
+            builder.Services.AddMemoryCache();
+
             app.UseCors();
             app.UseAuthentication();
 
