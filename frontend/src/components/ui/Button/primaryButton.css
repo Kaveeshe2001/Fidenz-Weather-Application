@@ -27,7 +27,7 @@
    }
 
    .primary-btn svg {
-    fill: var(--primary-color);
+    fill: var(--bs-gray-700);
     transition: all .6s
     }
 
