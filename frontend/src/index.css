@@ -6,7 +6,9 @@
   --font-dmsans: "DM Sans", sans-serif;
   --font-playfair: "Playfair Display", serif;
   --primary-color: #01aa85;
+  --primary-color-opc: 1, 170, 133;
   --title-color: #0b0c0c;
+  --title-color-opc: 11, 12, 12;
   --white-color: #fff;
   --paragraph-color: #23291fbb;
 }
