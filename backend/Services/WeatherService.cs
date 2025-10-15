@@ -59,7 +59,9 @@ namespace backend.Services
         {
             try
             {
-                var response = await client.GetFromJsonAsync<OpenWeatherMapResponse>(url);
+                //Use JsonSerializerOptions to ignore case sensitivity
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var response = await client.GetFromJsonAsync<OpenWeatherMapResponse>(url, options);
                 if (response == null) return null;
 
                 // Map the response to the DTO
@@ -82,10 +84,14 @@ namespace backend.Services
             // Reads the city codes from the JSON file
             var path = Path.Combine(AppContext.BaseDirectory, "Data", "cities.json");
             var json = await File.ReadAllTextAsync(path);
-            var cities = JsonSerializer.Deserialize<List<City>>(json);
-            return cities?.Select(c => c.CityCode).ToList() ?? new List<string>();
+            var cityListContainer = JsonSerializer.Deserialize<CityListContainer>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return cityListContainer?.List?.Select(c => c.CityCode).ToList() ?? new List<string>();
         }
 
+        private class CityListContainer
+        {
+            public List<City> List { get; set; }
+        }
         private class City { public string CityCode { get; set; } }
     }
 }

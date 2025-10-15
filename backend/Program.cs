@@ -71,6 +71,7 @@ namespace backend
             builder.Services.AddScoped<IWeatherService, WeatherService>();
 
             builder.Services.AddHttpClient();
+            builder.Services.AddMemoryCache();
 
             var app = builder.Build();
 
@@ -87,8 +88,6 @@ namespace backend
             }
 
             app.UseHttpsRedirection();
-
-            builder.Services.AddMemoryCache();
 
             app.UseCors();
             app.UseAuthentication();

@@ -6,7 +6,6 @@ namespace backend.Controllers
 {
     [Route("backend/weather")]
     [ApiController]
-    [Authorize]
     public class WeatherController : Controller
     {
         private readonly IWeatherService _weatherService;
