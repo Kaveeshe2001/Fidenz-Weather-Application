@@ -1,1 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-dmsans: "DM Sans", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  --primary-color: #01aa85;
+  --title-color: #0b0c0c;
+  --white-color: #fff;
+  --paragraph-color: #23291fbb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-dmsans) !important;
+}
+
+/* Container */
+.container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x)* .5);
+  padding-left: calc(var(--bs-gutter-x)* .5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+.auth-container {
+  position: absolute;
+
+
+}
+
+@media (min-width: 576px) {
+  .auth-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .auth-container {
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 1200px) {
+  .auth-container {
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+.auth-title {
+  color: var(--title-color);
+  margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.auth-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-sup {
+  margin-top: 20px !important;
+  color: var(--bs-dark-border-subtle);
+
+  a {
+    color: var(--primary-color);
+  }
+}
+
+.error-message {
+  color: var(--bs-danger);
+  font-size: 14px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.section-title3 h2 {
+  color: var(--title-color);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2;
+  font-family: var(--font-dmsans);
+  margin-bottom: 0;
+}
+
+.text-white {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
