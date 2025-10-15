@@ -39,7 +39,7 @@ const Input = ({
             value={value}
             onChange={onChange}
             accept={accept}
-            className="w-full h-[52px] bg-[var(--white-color)] text-[var(--paragraph-color)] font-normal px-[10px] py-[20px] border border-[var(--primary-color2-opc)] rounded-md text-sm focus:border-[var(--primary-color)] focus:outline-none"
+            className="h-[52px] w-full rounded-[5px] border border-[rgba(var(--primary-color2-opc),0.15)] bg-[var(--white-color)] px-[20px] py-[10px] text-sm font-normal text-[var(--paragraph-color)] focus:border-[var(--primary-color)] focus:outline-none"
         />
         <span className="error-message">{error}</span>
     </div>

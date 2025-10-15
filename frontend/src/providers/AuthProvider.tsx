@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { AuthUser, LoginRequest } from "../models/User";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
@@ -97,4 +97,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             {isReady ? children : null}
         </AuthContext.Provider>
    );
+};
+
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
 };

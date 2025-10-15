@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AuthResponse, LoginRequest } from "../models/User";
 import { handleError } from "../handlers/ErrorHandler";
+import type { AuthResponse, LoginRequest } from "../models/User";
 
 const api = 'http://localhost:5257/backend/';
 
