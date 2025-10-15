@@ -1,14 +1,10 @@
-import axios from "axios";
 import { handleError } from "../handlers/ErrorHandler";
 import type { AuthResponse, LoginRequest } from "../models/User";
-
-const api = 'http://localhost:5257/backend/';
+import apiClient from "./apiClient";
 
 export const loginAPI = async (credentials: LoginRequest) => {
     try {
-        const response = await axios.post<AuthResponse>(api + 'auth/login', {
-            credentials
-        });
+        const response = await apiClient.post<AuthResponse>('auth/login', credentials);
 
         if (response.data.access_token) {
             localStorage.setItem('accessToken', response.data.access_token);
