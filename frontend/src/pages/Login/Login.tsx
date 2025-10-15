@@ -3,7 +3,7 @@ import Form from "../../components/Form/Form";
 import { Col } from "react-bootstrap";
 import Input from "../../components/Input/Input";
 import PrimaryButton from "../../components/Button/PrimaryButton";
-import { useAuth } from "../../context/useAuth";
+import { useAuth } from "../../providers/AuthProvider";
 
 const Login = () => {
   const { loginUser } = useAuth();
@@ -70,7 +70,7 @@ const Login = () => {
             />
         </Col>
         <div className="auth-btn">
-          <PrimaryButton variant="active" text="Login" type="submit" />
+          <PrimaryButton variant="active" text={isLoading ? "Logging in..." : "Login"} type="submit" />
         </div>
       </Form>
     </div>

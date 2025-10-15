@@ -1,3 +1,5 @@
+import './primaryButton.css'
+
 type PrimaryButtonProps = {
     text: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
