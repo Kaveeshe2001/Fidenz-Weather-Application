@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 namespace backend
 {
@@ -9,13 +10,16 @@ namespace backend
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            
+
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigins",
-                    builder => builder.WithOrigins("http://localhost:5173", "http://localhost:5173")
-                                      .AllowAnyHeader()
-                                      .AllowAnyMethod()
-                                      .AllowCredentials());
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173") // The origin of your React app
+                          .AllowAnyHeader()  // Allows headers like "Content-Type", "Authorization"
+                          .AllowAnyMethod(); // Allows methods like GET, POST, PUT, DELETE
+                });
             });
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -28,7 +32,41 @@ namespace backend
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Fidenz Weather API", Version = "v1" });
+
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        Implicit = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri($"https://{builder.Configuration["Auth0:Domain"]}/authorize"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { "openid", "OpenID Connect" },
+                                { "profile", "User Profile" },
+                                { "email", "User Email" }
+                            }
+                        }
+                    }
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                        },
+                        new[] { "openid", "profile", "email" }
+                    }
+                });
+            });
+
+
 
             var app = builder.Build();
 
@@ -36,7 +74,12 @@ namespace backend
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.OAuthClientId(builder.Configuration["Auth0:ClientId"]);
+                    options.OAuthAppName("Fidenz Weather API - Swagger UI");
+                    options.OAuthUsePkce();
+                });
             }
 
             app.UseHttpsRedirection();

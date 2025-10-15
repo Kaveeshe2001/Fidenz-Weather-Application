@@ -29,7 +29,8 @@ namespace backend.Controllers
                 username = loginRequest.Email,
                 password = loginRequest.Password,
                 audience = _config["Auth0:Audience"],
-                client_id = _config["Auth0:ClientId"]
+                client_id = _config["Auth0:ClientId"],
+                connection = "Username-Password-Authentication"
             });
 
             RestResponse response = await client.ExecuteAsync(request);
