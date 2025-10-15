@@ -1,3 +1,5 @@
+using backend.IServices;
+using backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
@@ -16,9 +18,9 @@ namespace backend
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173") // The origin of your React app
-                          .AllowAnyHeader()  // Allows headers like "Content-Type", "Authorization"
-                          .AllowAnyMethod(); // Allows methods like GET, POST, PUT, DELETE
+                    policy.WithOrigins("http://localhost:5173")
+                          .AllowAnyHeader()  
+                          .AllowAnyMethod(); 
                 });
             });
 
@@ -66,7 +68,9 @@ namespace backend
                 });
             });
 
+            builder.Services.AddScoped<IWeatherService, WeatherService>();
 
+            builder.Services.AddHttpClient();
 
             var app = builder.Build();
 
