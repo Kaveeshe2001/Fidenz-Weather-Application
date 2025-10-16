@@ -69,7 +69,16 @@ namespace backend.Services
                 {
                     CityName = response.Name,
                     Condition = response.Weather.FirstOrDefault()?.Description ?? "N/A",
-                    Temperature = response.Main.Temp
+                    Temperature = response.Main.Temp,
+                    TempMin = response.Main.Temp_Min,
+                    TempMax = response.Main.Temp_Max,
+                    Pressure = response.Main.Pressure,
+                    Humidity = response.Main.Humidity,
+                    Visibility = response.Visibility,
+                    WindSpeed = response.Wind.Speed,
+                    WindDegree = response.Wind.Deg,
+                    Sunrise = response.Sys.Sunrise,
+                    Sunset = response.Sys.Sunset
                 };
 
             } catch (Exception ex)
