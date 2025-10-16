@@ -1,6 +1,7 @@
 import { RiCloseLine, RiSendPlaneLine } from "@remixicon/react";
 import type { WeatherData } from "../../../models/Weather";
 import { getWeatherStyles } from "../../../utils/weatherStyles";
+import { useNavigate } from "react-router-dom";
 
 interface WeatherCardProps {
     weather: WeatherData;
@@ -8,12 +9,18 @@ interface WeatherCardProps {
 }
 
 const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
-    const { bgColor, icon: WeatherIcon } = getWeatherStyles(weather.condition);
+  const navigate = useNavigate();
+
+  const { bgColor, icon: WeatherIcon } = getWeatherStyles(weather.condition);
 
   const handleRemove = () => {
     if (onRemove) {
         onRemove(weather.cityName);
     }
+  };
+
+  const handleNavigate = () => {
+    navigate(`/weather/${weather.cityName}`, { state: { weather } });
   };
 
   const formatTime = (timestamp: number) =>
@@ -26,7 +33,7 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
   const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
   return (
-    <div className="rounded-lg shadow-xl overflow-hidden cursor-pointer flex flex-col">
+    <div onClick={handleNavigate} className="rounded-lg shadow-xl overflow-hidden cursor-pointer flex flex-col">
         <div
             className={`relative p-8 text-white bg-no-repeat bg-bottom ${bgColor}`}
             style={{ backgroundImage: `url('/card-bg.svg')` }}
@@ -66,7 +73,7 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
         </div>
 
         <div className="p-6" style={{ backgroundColor: '#30333d' }}>
-            <div className="flex justify-between items-center text-sm text-gray-300">
+            <div className="flex justify-between text-sm text-gray-300">
                 {/* Left Details */}
                 <div className="space-y-1">
                     <p>Pressure: {weather.pressure}hPa</p>
@@ -74,7 +81,7 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
                     <p>Visibility: {(weather.visibility / 1000).toFixed(1)}km</p>
                 </div>
 
-                <div className="border-r border-gray-200" />
+                <div className="border-r border-white/20 mx-4"></div>
 
                 {/* Center Wind Details */}
                 <div className="flex flex-col items-center gap-1">
@@ -82,7 +89,7 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
                     <p>{weather.windSpeed.toFixed(1)}m/s {weather.windDegree} Degree</p>
                 </div>
 
-                <div className="border-r border-gray-200" />
+                <div className="border-r border-white/20 mx-4"></div>
 
                 {/* Right Details */}
                 <div className="space-y-1 text-right">
