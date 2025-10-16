@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logo.svg"
 import PrimaryButton from "../ui/Button/PrimaryButton";
 import { logout } from "../../services/AuthService";
 import { RiLogoutBoxRLine } from "@remixicon/react";
@@ -18,11 +18,13 @@ const Navbar = () => {
         <img 
           src={logo} 
           alt="logo" 
-          className="w-20 sm:w-25 cursor-pointer"
+          className="w-20 sm:w-35 cursor-pointer"
           onClick={() => navigate('/')}
         />
         <div className="flex items-center gap-5">
-            <Search />
+            <div className="hidden sm:block">
+                <Search />
+            </div>
             <PrimaryButton
                 text="Logout"
                 variant="outline"
