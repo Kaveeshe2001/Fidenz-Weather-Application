@@ -1,7 +1,7 @@
 import './primaryButton.css'
 
 type PrimaryButtonProps = {
-    text: string;
+    text?: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     link?: string;
     type?: 'button' | 'submit' | 'reset';

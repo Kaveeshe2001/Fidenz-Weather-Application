@@ -43,6 +43,15 @@ body {
   z-index: -1; 
 }
 
+.card-bg {
+  position: fixed;
+  background-image: url('./assets/card-bg.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  z-index: -1; 
+}
+
 /* Container */
 .container {
   --bs-gutter-x: 1.5rem;
