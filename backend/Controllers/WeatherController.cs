@@ -16,6 +16,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetWeatherData()
         {
             var weatherData = await _weatherService.GetWeatherForAllCitiesAsync();
