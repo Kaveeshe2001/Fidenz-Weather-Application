@@ -45,7 +45,7 @@ const Home = () => {
       <div className="app-background" />
       <Navbar />
 
-      <div className="mx-auto p-4 flex flex-col gap-5 items-center justify-center">
+      <div className="mx-auto hide-scrollbar p-4 flex flex-col gap-5 items-center justify-center">
         <img 
           src={logo} 
           alt="logo" 
@@ -57,19 +57,19 @@ const Home = () => {
           <input
             type="text"
             placeholder="Enter a City"
-            className="flex-grow p-3 rounded-lg bg-gray-950 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-grow p-3 rounded-lg bg-gray-950 text-gray-300 placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#4b39ba]"
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
           />
           <button
             onClick={handleAddCity}
-            className="px-6 py-3 rounded-lg bg-purple-800 text-gray-300 font-semibold hover:bg-purple-900 transition-colors cursor-pointer"
+            className="px-6 py-3 rounded-lg bg-[#6c5dd3] text-gray-300 font-semibold hover:bg-[#4b39ba] transition-colors cursor-pointer"
           >
             Add City
           </button>
         </div>
 
-        <div className="w-full max-w-5xl flex-grow overflow-y-auto">
+        <div className="w-full max-w-5xl flex-grow overflow-y-auto hide-scrollbar">
           {isLoading && <p>Loading weather...</p>}
           {error && <p className="text-red-500">{error}</p>}
           {!isLoading && !error && (

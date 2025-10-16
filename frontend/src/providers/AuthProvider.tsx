@@ -1,15 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { AuthUser, LoginRequest } from "../models/User";
+import type { AuthResponse, AuthUser} from "../models/User";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { loginAPI } from "../services/AuthService";
 
 interface AuthContextType {
     user: AuthUser | null;
     token: string | null;
-    loginUser: (credentials: LoginRequest) => Promise<void>;
+    handleFinalLogin: (tokenResponse: AuthResponse) => void;
     logout: () => void;
     isLoggedIn: () => boolean;
 }
@@ -48,27 +47,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsReady(true);
    }, []);
 
-   const loginUser = async (credentials: LoginRequest) => {
-        try {
-            const response = await loginAPI(credentials);
+   const handleFinalLogin = (tokenResponse: AuthResponse) => {
+        const { access_token } = tokenResponse;
+        const decodedToken = jwtDecode<AuthUser>(access_token);
 
-            if (response && response.access_token) {
-                const { access_token } = response;
-                const decodedToken = jwtDecode<AuthUser>(access_token);
+        localStorage.setItem("accessToken", access_token);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
-                localStorage.setItem("accessToken", access_token);
-                axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
-      
-                setToken(access_token);
-                setUser(decodedToken);
-      
-                toast.success("Login Successful!");
-                navigate("/");
-            }
-            
-        } catch (error) {
-            console.error("Login failed:", error);
-        }
+        setToken(access_token);
+        setUser(decodedToken);
+        
+        toast.success("Login Successful!");
+        navigate("/");
    };
 
    const isLoggedIn = (): boolean => {
@@ -86,8 +76,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
    const contextValue = {
         user,
         token,
-        loginUser,
         logout,
+        handleFinalLogin,
         isLoggedIn,
 
    };

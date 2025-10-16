@@ -44,6 +44,10 @@ body {
   z-index: -1; 
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Container */
 .container {
   --bs-gutter-x: 1.5rem;
