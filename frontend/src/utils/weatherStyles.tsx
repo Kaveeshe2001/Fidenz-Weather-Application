@@ -6,29 +6,29 @@ export const getWeatherStyles = (condition: string) => {
     switch (true) {
         case lowerCaseCondition.includes("clear"):
             return {
-                gradient: "from-yellow-400 to-orange-500",
-                icon: <RiSunLine size={48} />,
+                bgColor: "bg-sky-500",
+                icon: <RiSunLine size={35} className="text-gray-300" />,
             };
             case lowerCaseCondition.includes("clouds"):
                 return {
-                  gradient: "from-blue-400 to-indigo-600",
-                  icon: <RiCloudyLine size={48} />,
+                  bgColor: "bg-indigo-600",
+                  icon: <RiCloudyLine size={35} className="text-gray-300" />,
                 };
             case lowerCaseCondition.includes("rain"):
                 return {
-                  gradient: "from-gray-500 to-blue-800",
-                  icon: <RiRainyLine size={48} />,
+                  bgColor: "bg-green-700",
+                  icon: <RiRainyLine size={35} className="text-gray-300" />,
                 };
             case lowerCaseCondition.includes("mist"):
             case lowerCaseCondition.includes("fog"):
                 return {
-                  gradient: "from-slate-500 to-slate-700",
-                  icon: <RiMistLine size={48} />,
+                  bgColor: "bg-red-600",
+                  icon: <RiMistLine size={35} className="text-gray-300" />,
                 };
             default:
                 return {
-                    gradient: "from-indigo-800 to-purple-900",
-                    icon: <RiTempColdLine size={48} />,
+                    bgColor: "bg-orange-700",
+                    icon: <RiTempColdLine size={35} className="text-gray-300" />,
                 };
     }
 };

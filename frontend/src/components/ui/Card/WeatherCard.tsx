@@ -8,7 +8,7 @@ interface WeatherCardProps {
 }
 
 const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
-    const { gradient, icon: WeatherIcon } = getWeatherStyles(weather.condition);
+    const { bgColor, icon: WeatherIcon } = getWeatherStyles(weather.condition);
 
   const handleRemove = () => {
     if (onRemove) {
@@ -28,13 +28,13 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
   return (
     <div className="rounded-lg shadow-xl overflow-hidden cursor-pointer flex flex-col">
         <div
-            className={`relative p-6 text-white bg-no-repeat bg-bottom ${gradient}`}
+            className={`relative p-8 text-white bg-no-repeat bg-bottom ${bgColor}`}
             style={{ backgroundImage: `url('/card-bg.svg')` }}
         >
             {onRemove && (
             <button
                 onClick={handleRemove}
-                className="absolute top-3 right-3 text-white/70 hover:text-white transition-colors"
+                className="absolute top-2 right-2 text-white/70 hover:text-white transition-colors cursor-pointer"
                 aria-label="Remove city"
             >
                 <RiCloseLine size={24} />
@@ -74,11 +74,15 @@ const WeatherCard = ({ weather, onRemove }: WeatherCardProps) => {
                     <p>Visibility: {(weather.visibility / 1000).toFixed(1)}km</p>
                 </div>
 
+                <div className="border-r border-gray-200" />
+
                 {/* Center Wind Details */}
                 <div className="flex flex-col items-center gap-1">
                     <RiSendPlaneLine size={24} style={{ transform: `rotate(${weather.windDegree}deg)` }} />
                     <p>{weather.windSpeed.toFixed(1)}m/s {weather.windDegree} Degree</p>
                 </div>
+
+                <div className="border-r border-gray-200" />
 
                 {/* Right Details */}
                 <div className="space-y-1 text-right">

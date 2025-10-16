@@ -34,8 +34,15 @@ const Home = () => {
     setCityInput('');
   };
 
+  const handleRemoveCity = (cityNameToRemove: string) => {
+    setWeatherData(currentData =>
+      currentData.filter(city => city.cityName !== cityNameToRemove)
+    );
+  };
+
   return (
-    <div className="app-background">
+    <div>
+      <div className="app-background" />
       <Navbar />
 
       <div className="mx-auto p-4 flex flex-col gap-5 items-center justify-center">
@@ -56,21 +63,24 @@ const Home = () => {
           />
           <button
             onClick={handleAddCity}
-            className="px-6 py-3 rounded-lg bg-purple-800 text-white font-semibold hover:bg-purple-900 transition-colors cursor-pointer"
+            className="px-6 py-3 rounded-lg bg-purple-800 text-gray-300 font-semibold hover:bg-purple-900 transition-colors cursor-pointer"
           >
             Add City
           </button>
         </div>
 
-        {isLoading && <p>Loading weather...</p>}
-        {error && <p className="text-red-500">{error}</p>}
-        {!isLoading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full max-w-5xl">
-            {weatherData.map((weather, index) => (
-              <WeatherCard key={weather.cityName || index} weather={weather} />
-            ))}
-          </div>
-        )}
+        <div className="w-full max-w-5xl flex-grow overflow-y-auto">
+          {isLoading && <p>Loading weather...</p>}
+          {error && <p className="text-red-500">{error}</p>}
+          {!isLoading && !error && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full max-w-5xl">
+              {weatherData.map((weather, index) => (
+                <WeatherCard key={weather.cityName || index} weather={weather} onRemove={handleRemoveCity} />
+              ))}
+            </div>
+          )}
+        </div>
+        
       </div>
 
       <Footer />
